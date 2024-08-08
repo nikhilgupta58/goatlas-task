@@ -30,3 +30,13 @@ export interface AUTH_CONFIG {
   footerText: string;
   footerNavigate: typeof LOGIN_ROUTE | typeof REGISTER_ROUTE;
 }
+
+export interface POST {
+  profile_picture: string;
+  name: string;
+  created_at: string;
+  edited: boolean;
+  comments_count: number;
+  comment: string;
+  emoji: string;
+}

@@ -11,18 +11,28 @@ export default function Modal({
   onClose: () => void;
 }) {
   const [type, setType] = useState<AuthGateTypes>(AuthGateTypes.LOGIN);
-
+  const [opacity, setOpacity] = useState<number>(0);
   useEffect(() => {
-    setType(AuthGateTypes.LOGIN);
+    if (isOpen) {
+      setType(AuthGateTypes.LOGIN);
+      setOpacity(100);
+    } else {
+      setOpacity(0);
+    }
   }, [isOpen]);
 
   return (
     <>
       {isOpen && (
         <>
-          <div className="blur-md absolute p-0 m-0 bg-black opacity-50 top-0 left-0 w-[100dvw] z-10 h-[100dvh]" />
-          <div className="top-0 left-0 flex justify-center rounded-full items-center w-[100dvw] h-[100dvh] absolute z-20">
-            <div className="max-w-[90vw] relative">
+          <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-filter transition-all backdrop-blur-[2px] z-10" />
+          <div className="absolute inset-0 flex justify-center items-center z-20">
+            <div
+              className={`max-w-[90vw] relative transition-all delay-50`}
+              style={{
+                opacity: opacity,
+              }}
+            >
               <AuthGate type={type} setType={setType} onSubmit={onClose} />
               <div
                 onClick={onClose}

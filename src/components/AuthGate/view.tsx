@@ -40,7 +40,7 @@ export default function AuthGate({ type }: { type: AuthGateTypes }) {
   const [show, setShow] = useState<boolean>(false);
   const setIsUser = useSetAtom(isUserAtom);
   return (
-    <div className="gradient-border w-[463px] px-6 justify-center items-center pt-10 pb-8 flex flex-col bg-dark2 gap-12">
+    <div className="gradient-border max-w-[90vw] w-[463px] px-6 justify-center items-center pt-10 pb-8 flex flex-col bg-dark2 gap-12">
       <div className="flex flex-col gap-2">
         <Text
           stylearr={[14, 17, 500]}
@@ -72,7 +72,7 @@ export default function AuthGate({ type }: { type: AuthGateTypes }) {
               </div>
               <div className="flex flex-col gap-[2px] w-full">
                 <Input
-                  value={val[field.id]}
+                  value={val[field.id] || ""}
                   onChange={(e) => handleChange(field.id, e.target.value)}
                   type={show ? FieldTypes.TEXT : field.type}
                   placeholder={field?.placeholder || ""}

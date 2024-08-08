@@ -2,9 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: "Inter", sans-serif;
+}
 .gradient-border {
-  border-width: 2px;
-  border-style: solid;
-  border-image-source: linear-gradient(129.59deg, #969696 0%, #343434 98.18%);
-  border-image-slice: 1;
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  padding: 2px;
+  background: linear-gradient(129.59deg, #969696 0%, #343434 98.18%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+input::placeholder {
+  font-size: 14px;
+  color: #7f8084;
 }

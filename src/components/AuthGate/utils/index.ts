@@ -46,12 +46,12 @@ const login_config: AUTH_CONFIG = {
     },
     {
       ...passwordField,
-      placeholder: "Enter your email or username",
+      placeholder: "Enter your password",
       forgotPassword: true,
     },
   ],
   actionCta: "Login now",
-  footerText: "Not registered yet? Register →",
+  footerText: `Not registered yet? <span class="text-lightGray">Register →</span>`,
   footerNavigate: REGISTER_ROUTE,
 };
 
@@ -66,11 +66,11 @@ const register_config: AUTH_CONFIG = {
     { ...usernameField, placeholder: "Choose a preferred username" },
     {
       ...passwordField,
-      placeholder: "Enter your email or username",
+      placeholder: "Choose a strong password",
     },
   ],
   actionCta: "Continue",
-  footerText: "Already have an account? Login →",
+  footerText: `Already have an account? <span class="text-lightGray">Login →</span>`,
   footerNavigate: LOGIN_ROUTE,
 };
 

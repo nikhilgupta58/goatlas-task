@@ -2,9 +2,6 @@ import {
   AuthGateTypes,
   FieldTypes,
   LOGIN_ROUTE,
-  regexEmail,
-  regexPassword,
-  regexUsername,
   REGISTER_ROUTE,
 } from "../../../utils/constants";
 import { AUTH_CONFIG, AuthConfig, FORM_FIELD } from "../../../utils/interfaces";
@@ -18,21 +15,18 @@ export const FORM_ID = {
 const emailField: FORM_FIELD = {
   label: "Email or Username",
   id: FORM_ID.EMAIL,
-  validator: regexEmail.test,
   type: FieldTypes.TEXT,
 };
 
 const usernameField: FORM_FIELD = {
   label: "Username",
   id: FORM_ID.USERNAME,
-  validator: regexUsername.test,
   type: FieldTypes.TEXT,
 };
 
 const passwordField: FORM_FIELD = {
   label: "Password",
   id: FORM_ID.PASSWORD,
-  validator: regexPassword.test,
   type: FieldTypes.PASSWORD,
 };
 

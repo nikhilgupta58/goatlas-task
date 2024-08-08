@@ -17,7 +17,6 @@ export type AuthConfig = {
 export interface FORM_FIELD {
   label: string;
   id: string;
-  validator: Function;
   type: FieldTypes;
   placeholder?: string;
   forgotPassword?: boolean;

@@ -1,6 +1,10 @@
 function App() {
   return (
-    <h1 className="text-3xl text-red-600 font-bold underline">Hello world!</h1>
+    <div className="bg-black flex justify-center items-center w-[100vw] h-[100vh]">
+      <div className="gradient-border w-[400px] h-[400px]">
+        This div has a gradient border using Tailwind plugin.
+      </div>
+    </div>
   );
 }
 

@@ -1,8 +1,14 @@
+import { useState } from "react";
 import Button from "../../../shared/Button";
+import Modal from "../../../shared/Modal";
 import Text from "../../../shared/Text";
 import { postClass, postInsideBoxClass } from "../utils";
 
 export default function NewPost() {
+  const [isOpen, setOpen] = useState<boolean>(false);
+  const onClose = () => {
+    setOpen(false);
+  };
   return (
     <div className={postClass}>
       <Text stylearr={[18, 22, 500]} className="text-lightGray">
@@ -21,6 +27,7 @@ export default function NewPost() {
           Post
         </Button>
       </div>
+      <Modal isOpen={isOpen} onClose={onClose} />
     </div>
   );
 }

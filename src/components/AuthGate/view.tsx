@@ -10,7 +10,13 @@ import { AuthGateTypes, FieldTypes } from "../../utils/constants";
 import { AUTH_CONFIG } from "../../utils/interfaces";
 import { authConfig } from "./utils";
 
-export default function AuthGate({ type }: { type: AuthGateTypes }) {
+export default function AuthGate({
+  type,
+  onSubmit = () => {},
+}: {
+  type: AuthGateTypes;
+  onSubmit?: Function;
+}) {
   const config: AUTH_CONFIG = authConfig[type];
   const navigate = useNavigate();
   const formIds = useMemo(
@@ -107,6 +113,7 @@ export default function AuthGate({ type }: { type: AuthGateTypes }) {
             dangerouslySetInnerHTML={{ __html: config.footerText }}
             onClick={() => {
               navigate(config.footerNavigate);
+              onSubmit();
             }}
           />
         </div>

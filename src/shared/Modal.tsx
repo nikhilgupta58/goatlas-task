@@ -1,5 +1,10 @@
-export default function Modal(){
-    return(
-        <></>
-    )
+export default function Modal({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: Function;
+}) {
+  console.log(isOpen, onClose);
+  return <></>;
 }

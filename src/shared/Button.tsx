@@ -18,6 +18,9 @@ export default function Button({
           ? "cursor-not-allowed brightness-[70%]"
           : "hover:brightness-110 hover:transition-all"
       } ${props?.className}`}
+      onClick={(e) => {
+        if (!isDisabled) props.onClick && props.onClick(e);
+      }}
     >
       {children}
     </button>

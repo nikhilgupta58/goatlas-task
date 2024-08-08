@@ -1,9 +1,12 @@
+import { useSetAtom } from "jotai";
 import { useEffect, useMemo, useState } from "react";
+import { LuEye, LuEyeOff } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import Button from "../../shared/Button";
 import Input from "../../shared/Input";
 import Text from "../../shared/Text";
-import { AuthGateTypes } from "../../utils/constants";
+import { isUserAtom } from "../../storeAtom";
+import { AuthGateTypes, FieldTypes } from "../../utils/constants";
 import { AUTH_CONFIG } from "../../utils/interfaces";
 import { authConfig } from "./utils";
 
@@ -34,6 +37,8 @@ export default function AuthGate({ type }: { type: AuthGateTypes }) {
     setVal(initialValues);
   }, [type, formIds]);
 
+  const [show, setShow] = useState<boolean>(false);
+  const setIsUser = useSetAtom(isUserAtom);
   return (
     <div className="gradient-border w-[463px] px-6 justify-center items-center pt-10 pb-8 flex flex-col bg-dark2 gap-12">
       <div className="flex flex-col gap-2">
@@ -49,8 +54,9 @@ export default function AuthGate({ type }: { type: AuthGateTypes }) {
       </div>
       <div className="w-full flex flex-col gap-5 z-50">
         {config.form.map((field, id) => {
+          const EyeIcon = !show ? LuEye : LuEyeOff;
           return (
-            <div key={`auth-form-${id}`} className="flex flex-col gap-2">
+            <div key={`auth-form-${id}`} className="flex flex-col gap-2 w-full">
               <div className="flex items-center justify-between">
                 <Text stylearr={[14, 17, 500]} className="text-lightGray">
                   {field.label}
@@ -64,13 +70,23 @@ export default function AuthGate({ type }: { type: AuthGateTypes }) {
                   </Text>
                 )}
               </div>
-              <div className="flex flex-col gap-[2px]">
+              <div className="flex flex-col gap-[2px] w-full">
                 <Input
                   value={val[field.id]}
                   onChange={(e) => handleChange(field.id, e.target.value)}
-                  className="rounded-[4px] border-[1.5px] border-darkGray h-[43px] bg-transparent px-3 text-lightGray text-[16px] leading-[20px] font-normal focus:outline-none"
-                  type={field.type}
+                  type={show ? FieldTypes.TEXT : field.type}
                   placeholder={field?.placeholder || ""}
+                  icon={
+                    field.type === FieldTypes.PASSWORD ? (
+                      <EyeIcon
+                        onClick={() => setShow((e) => !e)}
+                        size={20}
+                        className="text-gray2"
+                      />
+                    ) : (
+                      <></>
+                    )
+                  }
                 />
               </div>
             </div>
@@ -78,6 +94,9 @@ export default function AuthGate({ type }: { type: AuthGateTypes }) {
         })}
         <div className="flex flex-col gap-3">
           <Button
+            onClick={() => {
+              setIsUser(true);
+            }}
             isDisabled={isDisabled}
             className="h-[43px] rounded-[4px] bg-blueAccent text-[16px] leading-[19px] font-[500] text-white"
           >

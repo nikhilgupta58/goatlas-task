@@ -23,7 +23,10 @@ export default function NewPost() {
             How are you feeling today?
           </Text>
         </div>
-        <Button className="w-[111px] text-white bg-blueAccent h-[43px] rounded-[4px]">
+        <Button
+          onClick={() => setOpen(true)}
+          className="w-[111px] text-white bg-blueAccent h-[43px] rounded-[4px]"
+        >
           Post
         </Button>
       </div>

@@ -13,9 +13,11 @@ import { authConfig } from "./utils";
 export default function AuthGate({
   type,
   onSubmit = () => {},
+  setType = null,
 }: {
   type: AuthGateTypes;
   onSubmit?: Function;
+  setType?: Function | null;
 }) {
   const config: AUTH_CONFIG = authConfig[type];
   const navigate = useNavigate();
@@ -102,6 +104,7 @@ export default function AuthGate({
           <Button
             onClick={() => {
               setIsUser(true);
+              onSubmit();
             }}
             isDisabled={isDisabled}
             className="h-[43px] rounded-[4px] bg-blueAccent text-[16px] leading-[19px] font-[500] text-white"
@@ -112,8 +115,13 @@ export default function AuthGate({
             className="cursor-pointer text-[14px] font-[500] text-gray2 w-fit"
             dangerouslySetInnerHTML={{ __html: config.footerText }}
             onClick={() => {
-              navigate(config.footerNavigate);
-              onSubmit();
+              if (setType)
+                setType(
+                  type === AuthGateTypes.LOGIN
+                    ? AuthGateTypes.REGISTER
+                    : AuthGateTypes.LOGIN
+                );
+              else navigate(config.footerNavigate);
             }}
           />
         </div>
